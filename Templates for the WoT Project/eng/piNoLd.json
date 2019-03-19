@@ -1,0 +1,129 @@
+//You will find this file under './resources/'
+
+//You will find a brief description of the lines of code that you'll need to change, followed by an example based on the introduction of a PIR sensor
+//Remember that comments don't work in JSON so you'll have to erease them if you'll choose to edit THIS file!
+
+{
+  "id": "http://localhost:8484",
+  "name": "My WoT Raspberry PI",
+  "description": "A WoT-connected Raspberry Pi, using a PIR sensor and a virtual lock.",
+  "tags": [
+    "raspberry",
+    "pi",
+    "WoT"
+  ],
+  "customFields": {
+    "hostname":"localhost",
+    "port": 8484,
+    "secure": false,
+    "dataArraySize" : 30
+  },
+  "links": {
+    "product": {
+      "link": "https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/",
+      "title": "Product this Web Thing is based on"
+    },
+    "properties": {
+      "link": "/properties",
+      "title": "List of Properties",
+      "resources": {
+		"temperature": {
+          "name": "Temperature Sensor",
+          "description": "An ambient temperature sensor.",
+          "values": {
+            "t": {
+              "name": "Temperature sensor",
+              "description": "The temperature in celsius",
+              "unit": "celsius",
+              "customFields": {
+                "gpio": 12
+              }
+            }
+          },
+          "tags": [
+            "sensor",
+            "public",
+            "indoors"
+          ]
+        },
+        "humidity": {
+          "name": "Humidity Sensor",
+          "description": "An ambient humidity sensor.",
+          "values": {
+            "h": {
+              "name": "Humidity",
+              "description": "Percentage of Humidity",
+              "unit": "%",
+              "customFields": {
+                "gpio": 12
+              }
+            }
+          },
+          "tags": [
+            "sensor",
+            "public"
+          ]
+        },
+		//---------------------------EDIT THIS SECTION---------------------------
+		//we'll add our sensor here
+        "sensorName": {	//logical name of the sensor, becomes | "pir": {
+          "name": "Name of the Sensor",	//name you want to show inside the html view, becomes | "name": "Passive Infrared",
+          "description": "A generic sensor.",	//description of your sensor, becomes | "description": "A passive infrared sensor.",
+          "values": {	//leave this as is
+            "sensorValue": {	//this must be the same name you choose inside the plugin, becomes | "presence": {
+              "name": "SensorValue",	//this is the name given to the value of your sensor inside the html view, becomes | "name": "Presence",
+              "description": "Current sensor value",	//becomes | "description": "Current sensor value (true=motion detected)",
+              "type": "dataType",	//data type, becomes | "type": "boolean",
+              "customFields": {		//leave this as is
+                "gpio": 0		//GPIO number based on wher you will attatch it to your RPi, becomes | "gpio" : 17
+              }
+            }
+          },
+          "tags": [
+            "sensor",	//You can specify whether this is a sensor or an actuator
+            "public"	//you can specify whether this will be public or private
+          ]
+        },
+		//REMEMBER TO REMOVE EVERY COMMENT inside this file!!! <---------
+		//-----------------------------------------------------------------------
+		"lock": {
+          "name": "Virtual Lock",
+          "description": "A sensor that emulates a lock.",
+          "values": {
+            "locked": {
+              "name": "locked",
+              "description": "Current sensor value (true=door locked)",
+              "type": "boolean",
+              "customFields": {
+                "gpio": 24
+              }
+            }
+          },
+          "tags": [
+            "sensor",
+            "public"
+          ]
+        }
+      }
+    },
+	"actions": {
+		"link": "/actions",
+		"title": "Actions of this Web Thing",
+		"resources": {
+	  },
+		"comment": "We don't need Actions in this example"
+	},
+    "type": {
+      "link": "http://model.webofthings.io/",
+      "title": "Instance type of the Pi"
+    },
+    "help": {
+      "link": "http://webofthings.org/docs/pi/",
+      "title": "Documentation"
+    },
+    "ui": {
+      "link": "/",
+      "title": "User Interface"
+    }
+  }
+}
